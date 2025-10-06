@@ -1,0 +1,37 @@
+```
+└── 📁rick_and_morty
+    └── 📁app
+        └── 📁__tests__
+            ├── test.fake.php
+        └── 📁config
+            ├── api.php
+            ├── connection.php
+            ├── database.sql
+            ├── env.php
+        └── 📁controllers
+        └── 📁helpers
+            ├── response.php
+            ├── utils.php
+            ├── validation.php
+        └── 📁models
+            ├── character.php
+        └── 📁views
+            └── 📁api
+            └── 📁auth
+                ├── login.php
+            └── 📁characters
+            └── 📁head
+            ├── home.php
+        ├── routes.php
+    └── 📁github
+        └── 📁workflows
+    └── 📁public
+        └── 📁css
+        └── 📁img
+        └── 📁js
+        ├── index.php
+    └── 📁vendor
+    ├── .gitignore
+    ├── docker-compose.yml
+    └── Dockerfile
+```
