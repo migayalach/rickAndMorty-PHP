@@ -25,4 +25,27 @@ class CharactersModel
     $data = json_decode($response, true);
     return $data ?: false;
   }
+
+  public function paginationApi($page)
+  {
+    $getPagination = $this->api . '?page=' . $page;
+    $response = file_get_contents($getPagination);
+    if (!$response) return false;
+    $data = json_decode($response, true);
+    return $data ?: false;
+  }
+
+  public function totalPages()
+  {
+    $response = file_get_contents($this->api);
+    if (!$response) return 0;
+    $data = json_decode($response, true);
+    return $data['info']['pages'] ?? 0;
+  }
+
+  public function addStatus() {}
+
+  public function addSpecies() {}
+
+  public function addGender() {}
 }
