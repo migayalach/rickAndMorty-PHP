@@ -2,7 +2,13 @@
 require_once("/home/miguel/Documents/htdocs/rick_and_morty/views/head/head.php");
 require_once("/home/miguel/Documents/htdocs/rick_and_morty/controllers/character.controller.php");
 $character = new CharacterController();
-$data = $character->getAllApi();
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$pageAction = $character->paginationApi($page);
+$pages = $character->totalPages();
+$data = $pageAction ? $pageAction['results'] : [];
+$pagesPerBlock = 10;
+$start = floor(($page - 1) / $pagesPerBlock) * $pagesPerBlock + 1;
+$end = min($start + $pagesPerBlock - 1, $pages);
 ?>
 
 <div class="cards-container" style="display:flex; flex-wrap: wrap; gap: 10px;">
@@ -27,19 +33,25 @@ $data = $character->getAllApi();
 
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
+
+    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+      <a class="page-link" href="?page=<?= max(1, $page - 1) ?>" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
+
+    <?php for ($i = $start; $i <= $end; $i++): ?>
+      <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+        <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+      </li>
+    <?php endfor; ?>
+
+    <li class="page-item <?= $page == $pages ? 'disabled' : '' ?>">
+      <a class="page-link" href="?page=<?= min($pages, $page + 1) ?>" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
+
   </ul>
 </nav>
 
