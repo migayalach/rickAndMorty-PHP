@@ -21,4 +21,23 @@ class CharacterController
     if ($data) return $data;
     return false;
   }
+
+  public function paginationApi($page)
+  {
+    $data = $this->model->paginationApi($page);
+    if ($data) return $data;
+    return false;
+  }
+
+  public function totalPages()
+  {
+    $data = $this->model->totalPages();
+    return $data;
+  }
+
+  public function addStatus() {}
+
+  public function addSpecies() {}
+
+  public function addGender() {}
 }
